@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Dashboard</h2>
+        <label>Center:</label>
+        <select id="centerDropdown">
+            <option>Center 1</option>
+            <option>Center 2</option>
+        </select>
+        
+        <label>Department:</label>
+        <select id="departmentDropdown">
+            <option>Dept 1</option>
+            <option>Dept 2</option>
+        </select>
+
+        <label>Batch:</label>
+        <select id="batchDropdown">
+            <option>Batch 1</option>
+            <option>Batch 2</option>
+        </select>
+
+        <label>Candidate:</label>
+        <select id="candidateDropdown">
+            <option>Candidate 1</option>
+            <option>Candidate 2</option>
+        </select>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let role = localStorage.getItem("role");
+
+            if (!role) {
+                window.location.href = "index.html";
+            }
+
+            let centerDropdown = document.getElementById("centerDropdown");
+            let departmentDropdown = document.getElementById("departmentDropdown");
+            let batchDropdown = document.getElementById("batchDropdown");
+            let candidateDropdown = document.getElementById("candidateDropdown");
+
+            if (role === "Center Manager") {
+                centerDropdown.disabled = true;
+            } else if (role === "HOD") {
+                centerDropdown.disabled = true;
+                departmentDropdown.disabled = true;
+            } 
+
+            // Admin gets full access, so no disabling needed
+        });
+
+        function logout() {
+            localStorage.removeItem("role");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
